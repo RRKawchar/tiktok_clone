@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tiktok_clone_app/conitrollers/video_controller.dart';
 import 'package:tiktok_clone_app/constants.dart';
+import 'package:tiktok_clone_app/views/widgets/circle_animation.dart';
 import 'package:tiktok_clone_app/views/widgets/video_player_item.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoScreen extends StatelessWidget {
-  const VideoScreen({Key? key}) : super(key: key);
+  VideoScreen({Key? key}) : super(key: key);
+
+  final VideoController videoController = Get.put(VideoController());
 
   buildProfile(String profilePhoto) {
     return SizedBox(
@@ -25,9 +30,34 @@ class VideoScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Image(
-                  image: NetworkImage(profilePhoto),fit: BoxFit.cover,
+                  image: NetworkImage(profilePhoto),
+                  fit: BoxFit.cover,
                 ),
               ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  buildMusicAlbam(String profilePhoto) {
+    return SizedBox(
+      height: 60,
+      width: 60,
+      child: Column(
+        children: [
+          Container(
+            height: 50,
+            width: 50,
+            padding: const EdgeInsets.all(11),
+            decoration: BoxDecoration(
+              gradient:const LinearGradient(colors: [Colors.grey, Colors.white]),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Image(image: NetworkImage(profilePhoto),fit: BoxFit.cover,),
             ),
           )
         ],
@@ -39,14 +69,15 @@ class VideoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: PageView.builder(
-          itemCount: 10,
+      body: Obx(()=>PageView.builder(
+          itemCount: videoController.videoList.length,
           controller: PageController(initialPage: 0, viewportFraction: 1.0),
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
+            final data=videoController.videoList[index];
             return Stack(
               children: [
-                // VideoPlayerItem(videoUrl: ,),
+                VideoPlayerItem(videoUrl:data.videoUrl ,),
                 Column(
                   children: [
                     const SizedBox(
@@ -64,30 +95,30 @@ class VideoScreen extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  const Text(
-                                    "Username",
-                                    style: TextStyle(
+                                   Text(
+                                    data.username,
+                                    style:const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                         fontSize: 20),
                                   ),
-                                  const Text(
-                                    "caption",
-                                    style: TextStyle(
+                                   Text(
+                                    data.caption,
+                                    style:const TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   ),
                                   Row(
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         Icons.music_note,
                                         color: Colors.white,
                                         size: 15,
                                       ),
                                       Text(
-                                        "song name",
-                                        style: TextStyle(
+                                        data.songName,
+                                        style:const TextStyle(
                                             color: Colors.white,
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold),
@@ -102,8 +133,71 @@ class VideoScreen extends StatelessWidget {
                             width: 100,
                             margin: EdgeInsets.only(top: size.height / 5),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                buildProfile("String url")
+                                buildProfile(data.profilePhoto),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: ()=>videoController.likeVideo(data.id),
+                                      child: const Icon(
+                                        Icons.favorite,
+                                        size: 40,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                     Text(
+                                      data.likes.length.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {},
+                                      child: const Icon(
+                                        Icons.comment,
+                                        size: 40,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                     Text(
+                                      data.commentCount.toString(),
+                                      style:const TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {},
+                                      child: const Icon(
+                                        Icons.reply,
+                                        size: 40,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 7,
+                                    ),
+                                     Text(
+                                     data.shareCount.toString(),
+                                      style:const TextStyle(
+                                          fontSize: 20, color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                                CircleAnimation(
+                                    child: buildMusicAlbam(data.profilePhoto))
                               ],
                             ),
                           )
@@ -114,7 +208,7 @@ class VideoScreen extends StatelessWidget {
                 )
               ],
             );
-          }),
+          }),)
     );
   }
 }

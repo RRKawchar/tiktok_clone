@@ -34,6 +34,8 @@ class AuthController extends GetxController {
 
 
    File? get profilePic=>_pickedImage.value;
+   User get user=> _user.value!;
+
   /// Pic Image
   void picImage() async {
     final pickImage =
