@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tiktok_clone_app/constants.dart';
 import 'package:tiktok_clone_app/models/users.dart';
 import 'package:tiktok_clone_app/views/screens/auth/login_screen.dart';
+import 'package:tiktok_clone_app/views/screens/auth/signup_screen.dart';
 import 'package:tiktok_clone_app/views/screens/home_screen.dart';
 
 class AuthController extends GetxController {

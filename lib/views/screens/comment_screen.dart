@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiktok_clone_app/conitrollers/comment_controller.dart';
+import 'package:timeago/timeago.dart' as tago;
 
 class CommentScreen extends StatelessWidget {
   final String id;
@@ -22,25 +23,27 @@ class CommentScreen extends StatelessWidget {
               Expanded(
                 child: Obx(() {
                     return ListView.builder(
-                      itemCount: 1,
+                      itemCount: commentController.comments.length,
                       itemBuilder: (context, index) {
+
+                        final comments=commentController.comments[index];
                         return ListTile(
-                          leading: const CircleAvatar(
+                          leading: CircleAvatar(
                             backgroundColor: Colors.black,
-                            backgroundImage: NetworkImage('profile image'),
+                            backgroundImage: NetworkImage(comments.profilePhoto),
                           ),
                           title: Row(
-                            children: const [
+                            children:[
                               Text(
-                                "username",
-                                style: TextStyle(
+                                "${comments.username}  ",
+                                style:const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.red),
                               ),
                               Text(
-                                "Comment description",
-                                style: TextStyle(
+                                comments.comment,
+                                style:const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white),
@@ -48,17 +51,17 @@ class CommentScreen extends StatelessWidget {
                             ],
                           ),
                           subtitle: Row(
-                            children: const [
+                            children:[
                               Text(
-                                "data",
-                                style: TextStyle(fontSize: 12, color: Colors.white),
+                                tago.format(comments.datePublished.toDate()),
+                                style:const TextStyle(fontSize: 12, color: Colors.white),
                               ),
                               const SizedBox(
                                 width: 10,
                               ),
                               Text(
-                                "10 likes",
-                                style: TextStyle(fontSize: 12, color: Colors.white),
+                                "${comments.likes.length} likes",
+                                style:const TextStyle(fontSize: 12, color: Colors.white),
                               )
                             ],
                           ),
