@@ -4,13 +4,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone_app/conitrollers/auth_controller.dart';
 import 'package:tiktok_clone_app/views/screens/add_video_screen.dart';
+import 'package:tiktok_clone_app/views/screens/search_screen.dart';
 import 'package:tiktok_clone_app/views/screens/video_screen.dart';
 
 /// PAGE
-List pages=[
+var pages=[
  VideoScreen(),
- Center(child: Text("Search Screen")),
- AddVideoScreen(),
+ SearchScreen(),
+ const AddVideoScreen(),
  Center(child: Text("Message Screen")),
  Center(child: Text("Profile Screen")),
 ];
