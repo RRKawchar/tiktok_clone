@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+
+///My profile screen
+
 class ProfileScreen extends StatelessWidget {
   final String uid;
   const ProfileScreen({Key? key, required this.uid}) : super(key: key);
