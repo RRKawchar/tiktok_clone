@@ -1,16 +1,7 @@
 # tiktok_clone_app
-
-A new Flutter project.
+#firebase database
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Apple iPhone 11 Pro Max Presentation](https://github.com/RRKawchar/tiktok_clone/assets/97376140/624335c7-b7bc-4a79-8843-38e18aad86ce)
+![Apple iPhone 11 Pro Max Presentation (2)](https://github.com/RRKawchar/tiktok_clone/assets/97376140/8051ef6c-4b96-4b79-8ade-fea3d9eb4995)
+![Apple iPhone 11 Pro Max Presentation (1)](https://github.com/RRKawchar/tiktok_clone/assets/97376140/b243d377-9d1a-4da9-a131-372bf6ba5737)
